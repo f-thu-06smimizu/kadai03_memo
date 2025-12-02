@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おみくじ</title>
+  <link rel="stylesheet" href="./css/sample.css">
+</head>
+
+<body>
+  <header>
+    <h1>おみくじ</h1>
+  </header>
+
+  <main>
+    <ul>
+      <li id="pull">おみくじを引く</li>
+    </ul>
+    <p id="echo">結果は？</p>
+    <div id="history">
+      <p>履歴が表示されます</p>
+    </div>
+  </main>
+
+  <footer>フッター</footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+// 1. history配列をイベントハンドラの外（グローバルまたはスクリプトのスコープ）に定義
+const history = [];
+
+$('#pull').on('click', function () {
+  const omikuji = ['大吉', '中吉', '小吉', '凶', '大凶'];
+  const random = Math.floor(Math.random() * omikuji.length);
+  const result = omikuji[random];
+
+  // 画面に結果を表示
+  $('#echo').text(result);
+
+  // ↓ここから履歴処理をイベントハンドラ内に移動・記述↓
+
+  // 2. 結果を履歴配列の先頭に追加
+  history.unshift(result);
+
+  // 3. 履歴表示用のHTMLを格納する配列を初期化
+  const ptags = [];
+
+  // 4. history配列の内容からHTML要素を作成
+  for (let i = 0; i < history.length; i++) {
+    ptags.push("<p>" + history[i] + "</p>");
+  }
+  
+  // 5. 履歴表示エリアを更新
+  $("#history").html(ptags);
+});
+
+</script>
+
+</body>
+
+</html>

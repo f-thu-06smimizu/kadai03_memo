@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title> クエストToDo </title>
+    <link rel="stylesheet" href="css/sample.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+
+  <body>
+    <header>
+      <h1> クエストToDo </h1>
+    </header>
+
+    <main>
+      
+      <section id="status-display">
+        <div class="status-box">
+            <i class="fas fa-crown"></i> <span>レベル:</span> <span id="user-level">1</span>
+        </div>
+        <div class="status-box xp-bar">
+            <i class="fas fa-star"></i> <span>経験値 (XP):</span> 
+            <span id="user-xp">0</span> / <span id="next-level-xp">100</span> XP
+        </div>
+      </section>
+      <section id="input-section">
+        <textarea 
+          id="text_area" 
+          placeholder="新しいクエスト（タスク）を入力！達成で経験値GET！"
+          aria-label="クエスト入力エリア"
+        ></textarea>
+        
+        <ul class="main-buttons">
+          <li id="save" role="button" aria-controls="list"><i class="fas fa-plus-circle"></i> クエスト追加！</li>
+          <li id="clear" role="button"><i class="fas fa-trash-alt"></i> 全データ破棄</li>
+        </ul>
+
+        <ul class="action-buttons">
+            <li id="clear-completed" role="button"><i class="fas fa-check-double"></i> 達成済みを削除</li>
+        </ul>
+      </section>
+
+      <hr> <section id="list-section">
+        <h2>🔥 未達成のクエスト</h2>
+        <ul id="list" aria-live="polite">
+          </ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>G's</small>
+    </footer>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="main.js"></script> 
+  </body>
+</html>

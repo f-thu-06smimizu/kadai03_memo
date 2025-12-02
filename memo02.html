@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>myMemoPad中級</title>
+    <link rel="stylesheet" href="css/sample.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>MemoPad中級編</h1>
+    </header>
+
+    <main>
+      <!-- 一行のテキストボックス -->
+      <input type="text" id="input_title" />
+      <!-- 複数行の入力エリア -->
+      <textarea id="text_area_1"></textarea>
+      <textarea id="text_area_2"></textarea>
+      <!-- 箇条書きのリストを作成 　操作を行うための「Save」ボタンと「Clear」ボタン-->
+      <ul>
+        <li id="save">Save</li>
+        <li id="clear">Clear</li>
+      </ul>
+    </main>
+
+    <footer>
+      <small>G's</small>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      // 1. 保存処理
+      $("#save").on("click", function () {
+        const data = {
+          title: $("#input").val(),
+          text1: $("#text_area_1").val(),
+          text2: $("#text_area_2").val(),
+        };
+
+        console.log(data);
+        const json = JSON.stringify(data);
+        console.log(json);
+        localStorage.setItem("memo", json);
+      });
+      //---
+
+      // 2. 削除の処理
+      $("#clear").on("click", function () {
+        localStorage.removeItem("memo");
+        $("#text_area_1").val("");
+        $("#text_area_2").val("");
+        $("#input_taitle").val("");
+      });
+
+
+      // 3. 保存値を表示（ページ読込）
+      $(document).ready(function () {
+        const json = localStorage.getItem("memo");
+        
+        // データが存在する場合のみ処理を実行
+        if (json) {
+          console.log(json);
+          const data = JSON.parse(json);
+          console.log(data);
+
+          $("#text_area_1").val(data.text1);
+          $("#text_area_2").val(data.text2);
+          $("#input_title").val(data.title);
+        }
+      });
+    </script>
+  </body>
+</html>
